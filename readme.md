@@ -19,5 +19,10 @@ functions :
   - `show-color : color -> string`
   - `show-opt-list : ('a -> string) -> ('a option) list -> string`
 
+
 ---
-(c) Naoki Kaneko 2019
+
+This package released under [the MIT license](https://github.com/puripuri2100/SATySFi-debug-show-value/blob/master/LICENSE).
+
+---
+(c) Naoki Kaneko (a.k.a. puripuri2100) 2019
