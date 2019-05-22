@@ -1,0 +1,104 @@
+@require: list
+
+module DebugShowValue : sig
+
+  val show-int : int -> string
+  val show-string : string -> string
+  val show-bool : bool -> string
+  val show-length-pt : length -> string
+  val show-length-mm : length -> string
+  val show-length-inch : length -> string
+  val show-unit : unit -> string
+  val show-tuple : ('a -> string) -> 'a list -> string
+  val show-list : ('a -> string) -> 'a list -> string
+  val show-opt : ('a -> string) -> 'a option -> string
+  val show-point : point -> string
+  val show-color : color -> string
+  val show-opt-list : ('a -> string) -> ('a option) list -> string
+
+end = struct
+
+let show-int i = arabic i
+
+let show-string s = s
+
+let show-bool b =
+  if b then `true` else `false`
+
+
+let show-length-pt len =
+  let fl = len /' 1pt in
+  let s-len = show-float fl in
+    s-len ^ `pt`
+
+
+let show-length-mm len =
+  let fl = len /' 1mm in
+  let s-len = show-float fl in
+    s-len ^ `mm`
+
+
+let show-length-inch len =
+  let fl = len /' 1inch in
+  let s-len = show-float fl in
+    s-len ^ `inch`
+
+
+let show-unit u = `()`
+
+
+let show-tuple f a-list =
+  let s-list = List.map f a-list in
+  let s-join i s1 s2 =
+    if i == 0 then
+      s2
+    else
+      s1 ^ `, `# ^ s2
+  in
+  let s-main = List.fold-lefti s-join ` ` s-list in
+    `(` ^ s-main ^ `)`
+
+
+let show-list f a-list =
+  let s-list = List.map f a-list in
+  let s-join i s1 s2 =
+    if i == 0 then
+      s2
+    else
+      s1 ^ `; `# ^ s2
+  in
+  let s-main = List.fold-lefti s-join ` ` s-list in
+    `[` ^ s-main ^ `]`
+
+
+let show-opt f a-opt =
+  match a-opt with
+  | Some(x) -> `Some` ^ `(` ^ f x ^ `)`
+  | None    -> `None`
+
+
+let show-point (x, y) =
+  let point-list = [x; y] in
+    show-tuple show-length-pt point-list
+
+
+let show-color color =
+  let show-cmyk c m y k =
+      `CMYK` ^ show-tuple show-float [c; m; y; k]
+  in
+  let show-rgb r g b =
+      `RGB` ^ show-tuple show-float [r; g; b]
+  in
+  let show-gray scale =
+      `Gray` ^ show-tuple show-float [scale]
+  in
+    match color with
+    | CMYK(c, m, y, k) -> show-cmyk c m y k
+    | RGB(r, g, b)     -> show-rgb r g b
+    | Gray(scale)      -> show-gray scale
+
+
+let show-opt-list f opt-list =
+  show-list (show-opt f) opt-list
+
+end

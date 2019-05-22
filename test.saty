@@ -1,0 +1,18 @@
+@require: stdja
+@require: color
+
+@import: debug-show-value
+
+document (|
+  title = {test};
+  author = {puripuri2100};
+  show-title = false;
+  show-toc = false;
+|) '<
+  +p(embed-string (DebugShowValue.show-color Color.blue));
+  +p(DebugShowValue.show-list DebugShowValue.show-string [] |> embed-string);
+  +p(DebugShowValue.show-list DebugShowValue.show-string [`hoge`; `fuga`] |> embed-string);
+  +p(DebugShowValue.show-point (52pt, 23pt) |> embed-string);
+  +p(DebugShowValue.show-opt-list DebugShowValue.show-string [Some(`hoge`); None; Some(`fuga`)] |> embed-string);
+  +p(DebugShowValue.show-opt-list DebugShowValue.show-int [Some(33); None; Some(4)] |> embed-string);
+>
