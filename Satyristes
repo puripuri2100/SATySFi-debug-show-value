@@ -3,10 +3,10 @@
 
 (library
   (name "debug-show-value")
-  (version "0.1.0")
+  (version "0.1.1")
   (sources
     (
-     (package "debug-show-value.satyh" "./debug-show-value.satyh")
+     (package "debug-show-value.satyg" "./debug-show-value.satyg")
     )
   )
   (opam "satysfi-assert-eq.opam")
