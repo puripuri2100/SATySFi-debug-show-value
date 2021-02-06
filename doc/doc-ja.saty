@@ -1,0 +1,35 @@
+@require: stdjabook
+@require: code
+@require: annot
+@require: itemize
+
+document (|
+  title = {debug-show-valueのドキュメント};
+  author = {Naoki Kaneko (a.k.a. "puripuri2100")};
+  show-title = true;
+  show-toc = false;
+|) '<
+  +section {使い方} <
+    +p{値がどのようになっているかを文字列化することで、確認できるようになります。}
+    +p{\href(`https://github.com/puripuri2100/SATySFi-assert-eq`){assert-eq}と一緒に使うことでテストを行いやすくなります。}
+  >
+
+  +section {提供関数} <
+    +p{モジュール名：\code(`DebugShowValue`);}
+    +listing {
+      * \code(`show-int : int -> string`);
+      * \code(`show-string : string -> string`);
+      * \code(`show-bool : bool -> string`);
+      * \code(`show-length-pt : length -> string`);
+      * \code(`show-length-mm : length -> string`);
+      * \code(`show-length-inch : length -> string`);
+      * \code(`show-unit : unit -> string`);
+      * \code(`show-tuple : ('a -> string) -> 'a list -> string`);
+      * \code(`show-list : ('a -> string) -> 'a list -> string`);
+      * \code(`show-opt : ('a -> string) -> 'a option -> string`);
+      * \code(`show-point : point -> string`);
+      * \code(`show-color : color -> string`);
+      * \code(`show-opt-list : ('a -> string) -> ('a option) list -> string`);
+    }
+  >
+>

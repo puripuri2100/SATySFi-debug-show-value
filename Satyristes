@@ -3,12 +3,33 @@
 
 (library
   (name "debug-show-value")
-  (version "0.1.1")
+  (version "0.1.2")
   (sources
     (
      (package "debug-show-value.satyg" "./debug-show-value.satyg")
     )
   )
-  (opam "satysfi-assert-eq.opam")
-  (dependencies ())
-  (compatibility ((satyrographos "0.0.1"))))
+  (opam "satysfi-debug-show-value.opam")
+  (dependencies ()))
+
+;; Library doc declaration
+(libraryDoc
+  ;; Library doc name
+  (name "debug-show-value-doc")
+  ;; Library version
+  (version "0.1.2")
+  ;; Working directory to build docs
+  (workingDirectory "doc")
+  ;; Build commands
+  (build
+    ;; Run SATySFi
+    ((satysfi "doc-ja.saty" "-o" "doc-ja.pdf")))
+  ;; Files
+  (sources
+    ((doc "doc-ja.pdf" "doc/doc-ja.pdf")))
+  ;; OPAM package file
+  (opam "satysfi-debug-show-value-doc.opam")
+  ;; Dependency
+  (dependencies
+    ((debug-show-value ()) ; the main library
+    )))
